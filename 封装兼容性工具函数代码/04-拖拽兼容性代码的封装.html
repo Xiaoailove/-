@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>玉树临风美少年，揽镜自顾夜不眠 </title>
+  <style type="text/css">
+    body {
+      height: 2000px;
+    }
+
+    img {
+      width: 100px;
+      height: 100px;
+      position: absolute;
+    }
+  </style>
+</head>
+
+<body>
+  <img id="im" src="./niao.jpg" alt="" />
+  <script type="text/javascript">
+    function my$(id) {
+      return document.getElementById(id)
+    }
+    // 注册事件
+    document.onmousemove = function (e) {
+      e = window.event || e
+      my$('im').style.left = evtObj.getPageX(e) + 'px'
+      my$('im').style.top = evtObj.getPageY(e) + 'px'
+    }
+
+    // clientX---IE8支持的
+    // pageX---IE8不支持
+
+    console.log(window)
+    var evtObj = {
+      // 事件参数对象的封装
+      getEvent: function (e) {
+        return e || window.event
+      },
+      // 可视区域的横坐标
+      getClientX: function (e) {
+        return this.getEvent(e).clientX
+      },
+      // 可视区域的纵坐标
+      getClientY: function (e) {
+        return this.getEvent(e).clientY
+      },
+      // 向左卷曲出去的距离
+      getScrollLeft: function () {
+        return window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0
+      },
+      // 向上卷曲出去的距离
+      getScrollTop: function () {
+        return window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
+      },
+      // 页面的横坐标
+      getPageX: function (e) {
+        return this.getEvent(e).pageX ? this.getEvent(e).pageX : this.getClientX(e) + this.getScrollLeft()
+      },
+      // 页面的纵坐标
+      getPageY: function (e) {
+        return this.getEvent(e).pageY ? this.getEvent(e).pageY : this.getClientY(e) + this.getScrollTop()
+      }
+
+    }
+  </script>
+</body>
+
+</html>
